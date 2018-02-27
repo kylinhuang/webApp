@@ -1,0 +1,198 @@
+
+<!-- saved from url=(0049)http://m.sui.taobao.org/examples/getting-started/ -->
+<html class="pixel-ratio-1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snap</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="http://m.sui.taobao.org/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+
+    <style type="text/css">.fancybox-margin{margin-right:0px;}</style></head>
+<body>
+<!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
+<div class="page-group">
+    <!-- 单个page ,第一个.page默认被展示-->
+    <div class="page">
+        <!-- 标题栏 -->
+        <header class="bar bar-nav">
+            <a class="icon icon-me pull-left open-panel" onclick="onclick_user()"></a>
+            <h1 class="title"></h1>
+
+        </header>
+
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab">
+            <a class="tab-item external active" href="#">
+                <span class="icon icon-home"></span>
+                <span class="tab-label">My Snap</span>
+            </a>
+
+            <a class="tab-item external" href="#">
+                <span class="icon icon-star"></span>
+                <span class="tab-label">Security</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="icon icon-settings"></span>
+                <span class="tab-label">Discover</span>
+            </a>
+        </nav>
+
+        <!-- 这里是页面内容区 -->
+        <!--<div class="content">-->
+            <!--<div class="content-block">这里是content</div>-->
+        <!--</div>-->
+
+        <!-- content应该拥有"pull-to-refresh-content"类,表示启用下拉刷新 -->
+        <div class="content pull-to-refresh-content" data-ptr-distance="55">
+            <!-- 默认的下拉刷新层 -->
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <!-- 下面是正文 -->
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">card</div>
+                    <div class="card-content">
+                        <div class="card-content-inner">
+                            这里是第1个card，下拉刷新会出现第2个card。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- 其他的单个page内联页（如果有） -->
+    <!--<div class="page">...</div>-->
+</div>
+
+
+
+
+
+<script type="text/javascript" src="./css/zepto.min.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="./css/sm.js" charset="utf-8"></script>
+<script type="text/javascript" src="./css/sm-extend.js" charset="utf-8"></script>
+
+
+<script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
+
+
+
+<script>
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        alert(url);
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        console.log(" theRequest: ",theRequest);
+        return theRequest;
+    }
+
+
+    // 添加'refresh'监听器
+    $(document).on('refresh', '.pull-to-refresh-content',function(e) {
+        // 模拟2s的加载过程
+        setTimeout(function() {
+            var cardNumber = $(e.target).find('.card').length + 1;
+            var cardHTML = '<div class="card">' +
+                '<div class="card-header">card'+cardNumber+'</div>' +
+                '<div class="card-content">' +
+                '<div class="card-content-inner">' +
+                '这里是第' + cardNumber + '个card，下拉刷新会出现第' + (cardNumber + 1) + '个card。' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+
+            $(e.target).find('.card-container').prepend(cardHTML);
+            // 加载完毕需要重置
+            $.pullToRefreshDone('.pull-to-refresh-content');
+        }, 2000);
+    });
+
+    function onclick_user() {
+//        alert("onclick_user");
+        // 由于对象映射，所以调用 test 对象等于调用Android映射的对象
+        JsInterface.onclickUesrIcon();
+    }
+
+
+    $.init();
+    var theRequest =  GetRequest();
+    console.log(" theRequest: ",theRequest);
+    var  sessionid = theRequest.sessionid;
+    var  url_host = theRequest.url_host;
+
+    console.log(" sessionid: ",sessionid);
+    console.log(" url_host: ",url_host);
+
+    url_host = "https://jx1.snap.test.cloud.sengled.com:443/";
+
+    send();
+
+    function send() {
+        CreateXMLHttpRequest();
+
+        var jsonObj =  {};
+        jsonObj.mobileUuid = "3a5ca8f723f2763f";
+        jsonObj.playWithSSL = 1;
+//            "{"mobileUuid":"3a5ca8f723f2763f","playWithSSL":1}";
+
+
+        var body = JSON.stringify(jsonObj);
+//        https://jx1.snap.test.cloud.sengled.com:443/camera/ipc/getCameraList.json
+
+
+        xmlhttp.onreadystatechange = callhandle;
+        //xmlhttp.open("GET","Default.aspx?goback=yes&arg=" + arg,true);
+        xmlhttp.open("POST", url_host + "/camera/ipc/getCameraList.json", true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");  //用POST的时候一定要有这句
+        xmlhttp.setRequestHeader("Set-Cookie", "JSESSIONID=" + sessionid)
+        xmlhttp.send(body);
+
+    }
+
+    function CreateXMLHttpRequest() {
+        if (window.ActiveXObject) {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        else if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        }
+    }
+    //设定函数doResult()
+    function callhandle() {
+
+        if (xmlhttp.readyState == 4) {//4代表执行完成
+            if (xmlhttp.status == 200) {//200代表执行成功
+                //将xmlHttpReg.responseText的值赋给ID为resText的元素
+//                var responseText = xmlHttpReg.responseText;
+                var responseText = JSON.stringify(xmlhttp.responseText);
+                console.log(" response : ",responseText);
+            }
+        }
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

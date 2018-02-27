@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+
+
+
+
+    <link rel="stylesheet" href="./css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/feedback.css" />
+</head>
+<body>
+
+<header class="bar bar-nav" style="background: #F39c62" >
+    <a class="icon icon-left pull-left"></a>
+    <!--<a class="icon icon-refresh pull-right"></a>-->
+    <h1 class="title" style="color:#FFFFFF" >Settings</h1>
+</header>
+
+
+
+<div class="content">
+    <div class="content-block-title" style="text-transform:none" >Subscription</div>
+    <div class="list-block">
+        <ul>
+            <li class="item-content ">
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner">
+                    <div style="line-height: 16px " >
+                        <div class="item-title">7-day Cloud Plan</div>
+                        <span  style="font-size: 2px">Expires on Mar 04,2018</span>
+                    </div>
+                    <div class="item-after">$7.9/month</div>
+                </div>
+            </li>
+            <li class="item-content item-link"  >
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner">
+                    <div class="item-title">Manage Subscription</div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="content-block-title" style="text-transform:none" >Camera Settings</div>
+    <div class="list-block">
+        <ul>
+            <li class="item-content " id="item-Night-Visiont">
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner">
+                    <div class="item-title">Night Vision</div>
+                    <div class="item-after">
+                        <p id="item-Night-Visiont-switch" style=" color: #F39c62;border-radius: 25px; background: #FFFFFF; border: 2px solid #f2f2f2;text-align:center; line-height: 35px;  width: 60px; height: 35px;">auto</p>
+                    </div>
+
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner">
+                    <div class="item-title">Microphone</div>
+                    <div class="mui-switch mui-active mui-switch-mini Microphone_Switch" id="Microphone_Switch">
+                        <div class="mui-switch-handle"></div>
+                    </div>
+
+                </div>
+            </li>
+
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner">
+                    <div class="item-title">Resoultion</div>
+                    <div class="item-after"  style="color:#F39c62" >720</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div class="content-block-title" style="text-transform:none">Subscrity Settings</div>
+    <div class="list-block">
+        <ul>
+
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner">
+                    <div style="line-height: 16px " >
+                        <div class="item-title">Motion Detection</div>
+                        <span  style="font-size: 2px">paid service plan required for this feature</span>
+                    </div>
+                    <div class="item-after"  style="color:#F39c62" >ON</div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <div class="content-block-title" style="text-transform:none">Discover Settings</div>
+    <div class="list-block">
+        <ul>
+            <li class="item-content">
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner">
+                    <div style="line-height: 16px ">
+                        <div class="item-title">Discoverable</div>
+                        <span  style="font-size: 2px">share to public</span>
+                    </div>
+
+                    <div class="mui-switch mui-active mui-switch-mini Discoverable_Switch" id="Discoverable_Switch">
+                        <div class="mui-switch-handle"></div>
+                    </div>
+                </div>
+            </li>
+            <div class="item-inner " id="share_textarea" >
+                <textarea style="width: 100% ; hight:auto; padding: 0 25px"   >Describe your Snap
+                </textarea>
+            </div>
+        </ul>
+        <p style="padding: 5px 25px">Turning on this feature allows other Snap users to find and stream your bulb's live footage.</p>
+    </div>
+
+     <div style="width: 100% ;height: 50px"></div>
+
+
+</div>
+
+
+<script src="./js/mui.min.js "></script>
+<script src="./js/mui.view.js "></script>
+<script src='./js/feedback.js'></script>
+
+<script>
+    mui.init({
+        swipeBack:false //启用右滑关闭功能
+    });
+
+    document.getElementById("Discoverable_Switch").addEventListener('toggle', function(event) {
+        //event.detail.isActive 可直接获取当前状态
+        if (event.detail.isActive){
+            document.getElementById("share_textarea").style.display="";//显
+        }else {
+            document.getElementById("share_textarea").style.display="none";//隐藏
+        }
+    });
+
+
+    document.getElementById("Microphone_Switch").addEventListener('toggle', function(event) {
+        //event.detail.isActive 可直接获取当前状态
+        //TODO Microphone_Switch 切换
+//        if (event.detail.isActive){
+//            document.getElementById("share_textarea").style.display="";//显
+//        }else {
+//            document.getElementById("share_textarea").style.display="none";//隐藏
+//        }
+
+    });
+
+
+    document.getElementById("item-Night-Visiont").addEventListener('tap', function() {
+        NightVisionttext = document.getElementById("item-Night-Visiont-switch").innerHTML;
+        if ("auto" == NightVisionttext) {
+            document.getElementById("item-Night-Visiont-switch").innerHTML = "off";
+            document.getElementById("item-Night-Visiont-switch").style.color="#000000";//显
+
+
+        }else{
+            document.getElementById("item-Night-Visiont-switch").innerHTML = "auto";
+            document.getElementById("item-Night-Visiont-switch").style.color="#F39c62";//显
+        }
+
+    });
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
