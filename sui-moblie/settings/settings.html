@@ -9,9 +9,39 @@
 
 
 
-
     <link rel="stylesheet" href="./css/mui.min.css">
     <link rel="stylesheet" type="text/css" href="./css/feedback.css" />
+
+
+    <style>
+        .Resoultion-popover-span{
+            position: absolute;
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: 0 -.5rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            line-height: 1.5rem;
+            color: #3d4145;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .Resoultion-popover-title{
+            position: absolute;
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: 0 -.5rem;
+            font-size: .85rem;
+            font-weight: 500;
+            line-height: 2.2rem;
+            color: #3d4145;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -72,13 +102,21 @@
                 </div>
             </li>
 
-            <li class="item-content item-link">
+
+
+
+
+            <li href="#Resoultion" class="item-content item-link">
                 <div class="item-media"><i class="icon icon-f7"></i></div>
                 <div class="item-inner">
                     <div class="item-title">Resoultion</div>
-                    <div class="item-after"  style="color:#F39c62" >720</div>
+
+                    <div class="item-after"  >
+                        <a href="#Resoultion"  style="color:#F39c62" >720</a>
+                    </div>
                 </div>
             </li>
+
         </ul>
     </div>
 
@@ -96,6 +134,23 @@
                         <span  style="font-size: 2px">paid service plan required for this feature</span>
                     </div>
                     <div class="item-after"  style="color:#F39c62" >ON</div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="content-block-title" style="text-transform:none">Light Settings</div>
+    <div class="list-block">
+        <ul>
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner">
+                    <div style="line-height: 23px "  id="item-Light-Automation">
+                        <div class="item-title">Light Automation</div>
+                        <span  style="font-size: 2px">Light turning on and off by schedule</span>
+                    </div>
+                    <!--<div class="item-after"  style="color:#F39c62" >ON</div>-->
                 </div>
             </li>
 
@@ -129,18 +184,40 @@
 
      <div style="width: 100% ;height: 50px"></div>
 
-
 </div>
 
+
+<div id="Resoultion" class="mui-popover mui-popover-action mui-popover-bottom">
+    <div style="background: #FFFFFF">
+        <div style="width:100%;height: 50px;flex-direction: row;justify-content: center ;align-content: center  ; " >
+            <span class ="Resoultion-popover-title">分辨率</span>
+        </div>
+        <div style="height: 1.5rem" >
+            <span class ="Resoultion-popover-span" >360</span>
+             </div>
+        <div style="height: 1.5rem" >
+            <span class ="Resoultion-popover-span">720</span>
+        </div>
+
+        <div style="height: 1.5rem" >
+            <span class ="Resoultion-popover-span">1080</span>
+        </div>
+    </div>
+</div>
 
 <script src="./js/mui.min.js "></script>
 <script src="./js/mui.view.js "></script>
 <script src='./js/feedback.js'></script>
 
+
+
 <script>
     mui.init({
         swipeBack:false //启用右滑关闭功能
     });
+
+
+
 
     document.getElementById("Discoverable_Switch").addEventListener('toggle', function(event) {
         //event.detail.isActive 可直接获取当前状态
@@ -170,7 +247,6 @@
             document.getElementById("item-Night-Visiont-switch").innerHTML = "off";
             document.getElementById("item-Night-Visiont-switch").style.color="#000000";//显
 
-
         }else{
             document.getElementById("item-Night-Visiont-switch").innerHTML = "auto";
             document.getElementById("item-Night-Visiont-switch").style.color="#F39c62";//显
@@ -178,9 +254,18 @@
 
     });
 
+    document.getElementById("item-Light-Automation").addEventListener('tap', function() {
+        alert("item-Light-Automation");
+
+    });
 
 
 
+
+    // Android需要调用的方法
+    function androidBack(){
+        alert("Android调用了JS的callJS方法");
+    }
 
 </script>
 
